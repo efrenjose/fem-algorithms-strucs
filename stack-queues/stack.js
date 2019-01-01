@@ -1,22 +1,38 @@
-var Stack = function(){
-    this.storage = "";
-    this.count = 0;
-    this.topItemLength = 0;
+var Stack = function(capacity){
+    this._capacity = capacity || Infinity;
+    this._storage = {};
+    this._count = 0;
 };
 
-Stack.prototype.push = function(val){
-    this.topItemLength = val.length + 1; //add 1 to compensate for semi column
-    this.storage += val + ";";
-    this.count++;
+Stack.prototype.push = function(value){
+    if (this._count < this._capacity) {
+        this._storage[this._count++] = value;
+        return this._count;
+    }
+    return "Maximum capacity reached."
 };
 
 Stack.prototype.pop = function(){
-    this.storage = this.storage.substring(0, (this.storage.length - this.topItemLength))
-    this.count--;
+    if (this._count === 0) {
+        return "Stack is empty";
+    }
+
+    var value = this._storage[--this._count];
+    delete this._storage[this._count];
+    
+    if (this._count < 0) {
+        this._count = 0;
+    }
+
+    return value;
+};
+
+Stack.prototype.peek = function() {
+    return this._storage[this._count-1];
 };
 
 Stack.prototype.size = function(){
-    return this.count;
+    return this._count;
 };
 
 module.exports = Stack;
