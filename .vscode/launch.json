@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/4-elementary-sorting/app.js"
+            "program": "${workspaceFolder}/udacity/1-list-based-collections/app.js"
         }
     ]
 }
